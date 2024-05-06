@@ -63,3 +63,40 @@ footer 内の ol タグでカウンターをリセットし、リストアイテ
 ```
 
 footer内のheadingレベルはsection内のheadingレベルから一つ下げたものになるように
+
+## V2
+上記はプログレッシブ・エンハンスメントの観点からNGかもしれない。jsの読み込みを拒否しているブラウザ設定では注記自体が表示されない。
+
+v2ではstaticな状態を以下とする
+
+
+```html
+<!-- without js -->
+<section|article>
+    <h2>title</h2>
+    <p>some text<sup data-footnote>※1</sup>another text<sup data-footnote>※2</sup>....</p>
+    <ol data-footnote-list>
+        <li>footnote description1</li>
+        <li>footnote description2</li>
+    </ol>
+</section|article>
+
+<!-- in js -->
+<section|article>
+    <h2>title</h2>
+    <p>some text<a 
+    id="footnote-ref-{hash}-1" 
+    href="#footnote-item-{hash}-1" 
+    aria-describedby="footnote-{hash}-1"
+    ><sup data-footnote>※1</sup></a>another text
+    <a 
+    id="footnote-ref-{hash}-2" 
+    href="#footnote-item-{hash}-2" 
+    aria-describedby="footnote-{hash}-2"
+    ><sup data-footnote>※2</sup></a>....</p>
+    <ol data-footnote-list id="footnote-{hash}" aria-label="注釈">
+        <li id="footnote-item-{hash}-1">footnote description1<a href="#footnote-ref-{hash}-1" aria-label="Back to content">↩</a></li>
+        <li id="footnote-item-{hash}-2">footnote description2<a href="#footnote-ref-{hash}-2" aria-label="Back to content">↩</a></li>
+    </ol>
+</section|article>
+```
