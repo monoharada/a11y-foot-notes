@@ -1,9 +1,9 @@
 {
-  "dependencies": { "lefthook": "^1.6.10" },
-  "devDependencies": {
-    "@biomejs/biome": "1.7.2"
-  },
-  "scripts": {
-    "check:fix": "biome check --apply footer-notes.js"
-  }
+	"dependencies": { "lefthook": "^1.6.10" },
+	"devDependencies": {
+		"@biomejs/biome": "1.7.2"
+	},
+	"scripts": {
+		"check:fix": "biome check --apply footer-notes.js"
+	}
 }

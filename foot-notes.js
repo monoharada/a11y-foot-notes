@@ -51,7 +51,7 @@ class Footnote extends HTMLElement {
 		if (!footer) {
 			footer = document.createElement("footer");
 			const heading = section.querySelector("h1, h2, h3, h4, h5, h6");
-			const·footerHeadingLevel = heading
+			const footerHeadingLevel = heading
 				? Number.parseInt(heading.tagName[1]) + 1
 				: 2;
 			const footerHeadingTag =
