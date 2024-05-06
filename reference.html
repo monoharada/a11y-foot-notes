@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>a11y footnotes</title>
+    <style>
+        html {
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 20px;
+  font-size: 125%;
+  line-height: 1.4;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+footer {
+  margin-top:20px;
+  font-size: 0.8em;
+}
+
+footer [id^="footnote-label"] + ol {
+  padding-left: 20px;
+  list-style: none;
+  counter-reset: footnotes;
+  
+  
+  & li {
+    text-indent: -2ch;
+    padding-left: 1ch;
+  }
+
+  & > li::before {
+    min-width: 2ch;
+    display: inline-block;
+  }
+  & li::before {
+    counter-increment: footnotes; /* 1 */
+      content: '※' counter(footnotes); /* 1 */
+      /* margin-right: 1em; */
+   
+    }
+  /* & li:only-child::before {
+      content: '※'; /* 1 */
+
+   
+    } */
+}
+
+/**
+ * Initialiazing a `footnotes` counter on the wrapper
+ */
+:where(article,section):has(a[aria-describedby^="footnote-label"]) {
+  counter-reset: footnotes;
+}
+
+/**
+ * Inline footnotes references
+ * 1. Increment the counter at each new reference
+ * 2. Reset link styles to make it appear like regular text
+ */
+[aria-describedby="footnote-label"] {
+  counter-increment: footnotes; /* 1 */
+  text-decoration: none; /* 2 */
+  color: inherit; /* 2 */
+  cursor: default; /* 2 */
+  outline: none; /* 2 */
+}
+
+/**
+ * Actual numbered references
+ * 1. Display the current state of the counter (e.g. `[1]`)
+ * 2. Align text as superscript
+ * 3. Make the number smaller (since it's superscript)
+ * 4. Slightly offset the number from the text
+ * 5. Reset link styles on the number to show it's usable
+ */
+[aria-describedby="footnote-label"]:not(:only-child)::after {
+  content: '※' counter(footnotes); /* 1 */
+  vertical-align: super; /* 2 */
+  font-size: 0.5em; /* 3 */
+  margin-left: 2px; /* 4 */
+  color: blue; /* 5 */
+  text-decoration: underline; /* 5 */
+  cursor: pointer; /* 5 */
+}
+[aria-describedby="footnote-label"]:only-child::after {
+  content: '※' ;
+  vertical-align: super; /* 2 */
+  font-size: 0.5em; /* 3 */
+  margin-left: 2px; /* 4 */
+  color: blue; /* 5 */
+  text-decoration: underline; /* 5 */
+  cursor: pointer; /* 5 */
+}
+
+/**
+ * Resetting the default focused styles on the number
+ */
+[aria-describedby="footnote-label"]:focus::after {
+  outline: thin dotted;
+  outline-offset: 2px;
+}
+
+[aria-label="Back to content"] {
+  font-size: 0.8em;
+}
+
+/**
+ * Highlight target note
+ */
+footer :target {
+  background: yellow;
+}
+
+/**
+ * Visually hidden yet accessible content
+ */
+.visually-hidden {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  visibility: hidden;
+  opacity: 0;
+}
+
+.p {
+  text-align: center;
+  font-size: .75em;
+  padding-top: 150px;
+}
+    </style>
+</head>
+<body>
+    <p><a tabindex="0"  role="note" aria-describedby="element">a</a></p>
+    <span id="element" hidden>bbbbb</span>
+
+    <article>
+        <h1>Accessible footnotes with CSS</h1>
+      
+        <p>Maintaining <a href="#footnotes" aria-describedby="footnote-label" id="footnotes-ref">footnotes</a> manually can be a pain. By using <a href="#css" aria-describedby="footnote-label" id="css-ref">CSS</a> <a href="#css-counters" aria-describedby="footnote-label" id="css-counters-ref">counters</a> to add the numbered references in the text and an ordered list to display the actual footnotes in the footer, it becomes extremely easy.</p>
+      
+        <footer>
+          <h2 class="visually-hidden" id="footnote-label">Footnotes</h2>
+          <ol>
+            <li id="footnotes">Footnotes are notes placed at the bottom of a page. They cite references or comment on a designated part of the text above it. <a href="#footnotes-ref" aria-label="Back to content">↩</a></li>
+            
+            <li id="css">Cascading Style Sheets <a href="#css-ref" aria-label="Back to content">↩</a></li>
+      
+            <li id="css-counters">CSS counters are, in essence, variables maintained by CSS whose values may be incremented by CSS rules to track how many times they're used. <a href="#css-counters-ref" aria-label="Back to content">↩</a></li>
+          </ol>
+        </footer>
+      </article>
+    <section>
+        <h2>Accessible footnotes with CSS</h2>
+      
+        <p>Maintaining <a href="#footnotes" aria-describedby="footnote-label" id="footnotes-ref">footnotes</a></p>
+      
+        <footer>
+          <h3 class="visually-hidden" id="footnote-label">Footnotes</h3>
+          <ol>
+            <li id="footnotes">Footnotes are notes placed at the bottom of a page. They cite references or comment on a designated part of the text above it. <a href="#footnotes-ref" aria-label="Back to content">↩</a></li>
+            
+          </ol>
+        </footer>
+      </section>
+      
+      
+</body>
+</html>

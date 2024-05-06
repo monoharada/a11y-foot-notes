@@ -1,0 +1,69 @@
+@layer component {
+footer [id^="footnote-label"]+ol {
+    padding-left: 20px;
+    list-style: none;
+    counter-reset: footnotes;
+
+
+    & li {
+        text-indent: -2ch;
+        padding-left: 1ch;
+    }
+
+    &>li::before {
+        min-width: 2ch;
+        display: inline-block;
+    }
+
+    & li::before {
+        counter-increment: footnotes;
+        content: '※' counter(footnotes);
+    }
+}
+
+/**
+* Initialiazing a `footnotes` counter on the wrapper
+*/
+:where(article, section):has(a[aria-describedby^="footnote"]) {
+    counter-reset: footnotes;
+}
+
+/**
+* Inline footnotes references
+* 1. Increment the counter at each new reference
+* 2. Reset link styles to make it appear like regular text
+*/
+[aria-describedby^="footnote"] {
+    counter-increment: footnotes;
+    /* 1 */
+    text-decoration: none;
+    /* 2 */
+    color: inherit;
+    /* 2 */
+    cursor: default;
+    /* 2 */
+    outline: none;
+    /* 2 */
+}
+
+a[aria-describedby^="footnote"]>sup {
+    font-size: 0.7em;
+    margin-left: 2px;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+[aria-describedby^="footnote"]:focus>sup {
+    outline: 1px dotted;
+    outline-offset: 4px;
+}
+
+[aria-describedby^="footnote"]:hover>sup {
+    text-decoration: none;
+}
+
+footer [id^="footnotes"]:target {
+    background: yellow;
+}
+}

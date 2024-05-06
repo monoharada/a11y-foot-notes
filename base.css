@@ -1,0 +1,33 @@
+@layer base,components;
+
+@layer base {
+  /* Add base styles here */
+
+  html {
+    box-sizing: border-box;
+  }
+
+  * {
+    box-sizing: inherit;
+  }
+
+  body {
+    margin: 20px;
+    font-size: 125%;
+    line-height: 1.4;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  footer {
+    margin-top: 20px;
+    font-size: 0.8em;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    /* visibility: hidden; */
+    opacity: 0;
+  }
+}
