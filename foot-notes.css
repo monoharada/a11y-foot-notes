@@ -63,7 +63,7 @@ a[aria-describedby^="footnote"]>sup {
     text-decoration: none;
 }
 
-footer [id^="footnotes"]:target {
+footer [id^="footnotes"]:target,ol[data-footnote="list"] [id^="footnote"]:target {
     background: yellow;
 }
 }
