@@ -1,5 +1,5 @@
 @layer component {
-footer [id^="footnote-label"]+ol {
+footer [id^="footnote-label"]+ol,ol[data-footnote="list"] {
     padding-left: 20px;
     list-style: none;
     counter-reset: footnotes;

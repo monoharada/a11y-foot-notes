@@ -9,9 +9,30 @@
 <link rel="stylesheet" href="base.css" media="screen">
 <link rel="stylesheet" href="foot-notes.css">
 <script type="module" src="foot-notes.js"></script>
+<script type="module" src="foot-notes-v2.js"></script>
+
 <body>
     <h1>foot-note(脚注|注記|補足)</h1>
     <a href="https://github.com/monoharada/a11y-foot-notes" target="_blank">github repo</a>
+    <section>
+        <h2>title</h2>
+        <p>some text<sup data-footnote="ref">※1</sup>another text<sup data-footnote="ref">※2</sup>....</p>
+        <ol data-footnote="list">
+            <li>footnote description1</li>
+            <li>footnote description2</li>
+        </ol>
+    </section>
+    <article>
+        <h2>title</h2>
+        <p>some text<sup data-footnote="ref">※1</sup>another text<sup data-footnote="ref">※2</sup>....</p>
+        <ol data-footnote="list">
+            <li>footnote description1</li>
+            <li>footnote description2</li>
+        </ol>
+    </article>
+
+    <hr>
+
     <article id="sec01">
         <h2>タイトル</h2>
         <p>
